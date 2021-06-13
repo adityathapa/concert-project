@@ -1,0 +1,91 @@
+/**
+ * Concert Ticket model
+ */
+
+namespace org.concert.network
+
+participant Buyer identified by buyerID {   //The participant Buyer will buy the tickets, either by
+  o String buyerID                          //SellTicket txn or ResellTicket txn
+  o String firstName
+  o String lastName
+  o String email
+  o Integer SSN
+}
+
+participant EventHost identified by eventHostID {   //The participant EventHost will host the concerts,
+  o String eventHostID                              //and create new concerts using CreateEvent txn
+  o String firstName
+  o String lastName
+  o String email
+  o Integer SSN
+}
+
+asset ConcertEvent identified by eventID {    //This asset represents the concert, with all the details
+  o String eventID                            //Buyer can check the event host also using the relation
+  o String date
+  o String description
+  o String venue
+  o EventType eventType
+  o Integer noOfTickets
+  o Integer marketPrice
+  --> EventHost eventHost
+}
+
+asset TicketListing identified by ticketListingID {   //This asset represents the ticket listing, with 
+  o String ticketListingID                            //an ID to track the event listing, and the actual
+  o String state optional                                      //ticket component
+  o Integer listingPrice
+  o Ticket ticket
+}
+
+asset Ticket identified by ticketID {   //This asset represents the Ticket itself. Contains a unique 
+  o String ticketID                     //ticketID, a seating ID, price and owner and last owner's
+  o String seatID                       //details
+  o TicketState ticketState
+  o Double faceValue
+  o Double salePrice optional
+  o ConcertEvent concertEvent
+  --> Buyer owner
+  --> Buyer lastOwner
+}
+
+transaction CreateEvent {   //This txn is used to create a concert event
+  o String eventID
+  o String date
+  o String description
+  o String venue
+  o EventType eventType
+  o Integer noOfTickets
+  o Integer faceValue optional
+  --> EventHost eventHost
+}
+
+transaction SellTicket {    //This txn is used to sell tickets
+  o String orderID
+  o String salePrice
+  o Ticket ticket
+  --> Buyer buyer
+}
+
+transaction ResellTicket {    //This txn is used to resell tickets
+  o String orderID
+  o String salePrice
+  o TicketListing ticketListing
+  --> Buyer buyer
+}
+
+transaction UseTicket {   //This txn is used to use a ticket
+  o Ticket ticket
+}
+
+enum EventType {
+  o RESERVED
+  o OPEN_SEATING
+}
+
+enum TicketState {
+  o UNSOLD
+  o SALE
+  o RESALE
+  o USED
+}

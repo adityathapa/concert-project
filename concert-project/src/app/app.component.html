@@ -1,0 +1,61 @@
+<!--
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <p class="network-name">concert-project@0.0.1.bna</p>
+        <p class="navbar-brand">concert-project</p>
+      </div>
+      <ul class="nav navbar-nav">
+        <li class="dropdown active">
+            <a class="dropdown-toggle" data-toggle="dropdown">Assets</a>
+            <ul class="dropdown-menu scrollable-menu">
+              
+              <li><a [routerLink]="['/ConcertEvent']">ConcertEvent</a></li>
+              
+              <li><a [routerLink]="['/TicketListing']">TicketListing</a></li>
+              
+              <li><a [routerLink]="['/Ticket']">Ticket</a></li>
+              
+            </ul>
+        </li>
+        <li class="dropdown active">
+          <a class="dropdown-toggle" data-toggle="dropdown">Participants</a>
+          <ul class="dropdown-menu scrollable-menu">
+            
+            <li><a [routerLink]="['/Buyer']">Buyer</a></li>
+            
+            <li><a [routerLink]="['/EventHost']">EventHost</a></li>
+            
+          </ul>
+      </li>
+      <li class="dropdown active">
+        <a class="dropdown-toggle" data-toggle="dropdown">Transactions</a>
+        <ul class="dropdown-menu scrollable-menu">
+          
+          <li><a [routerLink]="['/CreateEvent']">CreateEvent</a></li>
+          
+          <li><a [routerLink]="['/SellTicket']">SellTicket</a></li>
+          
+          <li><a [routerLink]="['/ResellTicket']">ResellTicket</a></li>
+          
+          <li><a [routerLink]="['/UseTicket']">UseTicket</a></li>
+          
+        </ul>
+    </li>
+      </ul>
+    </div>
+  </nav>
+  
+  <router-outlet></router-outlet>

@@ -1,0 +1,19 @@
+query Q1 {
+  description: "Select all members from Member Registry"
+  statement: SELECT org.concert.network.Buyer
+}
+
+query Q2 {
+  description: "Select all events from Event Registry"
+  statement: SELECT org.concert.network.ConcertEvent
+}
+
+query Q3 {
+  description: "Select all events from Ticket Registry"
+  statement: SELECT org.concert.network.Ticket
+}
+
+query Q4 {
+  description: "Select all events from Ticket Listing Registry"
+  statement: SELECT org.concert.network.TicketListing
+}

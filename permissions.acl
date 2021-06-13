@@ -1,0 +1,57 @@
+rule SystemACL {
+  description:  "System ACL to permit all access"
+  participant: "org.hyperledger.composer.system.Participant"
+  operation: ALL
+  resource: "org.hyperledger.composer.system.**"
+  action: ALLOW
+}
+
+rule NetworkAdminUser {
+    description: "Grant business network administrators full access to user resources"
+    participant: "org.hyperledger.composer.system.NetworkAdmin"
+    operation: ALL
+    resource: "**"
+    action: ALLOW
+}
+
+rule NetworkAdminSystem {
+    description: "Grant business network administrators full access to system resources"
+    participant: "org.hyperledger.composer.system.NetworkAdmin"
+    operation: ALL
+    resource: "org.hyperledger.composer.system.**"
+    action: ALLOW
+}
+
+rule EventHostReadEvents {
+  description: "Event Host can see all their events"
+  participant(p): "org.concert.network.EventHost"
+  operation: READ
+  resource(r): "org.concert.network.ConcertEvent"
+  condition: (p.getIdentifier() == r.eventHost.getIdentifier())
+  action: ALLOW
+}
+
+rule MembersReadTickets {
+  description: "Members can see only the tickets they have purchased"
+  participant(p): "org.concert.network.Buyer"
+  operation: READ
+  resource(r): "org.concert.network.Ticket"
+  condition: (p.getIdentifier() == r.owner.getIdentifier())
+  action: ALLOW
+}
+
+rule ReadTicketListing {
+  description: "Members can see only the tickets they have purchased"
+  participant: "org.concert.network.*"
+  operation: READ
+  resource: "org.concert.network.TicketListing"
+  action: ALLOW
+}
+
+rule ReadEvents {
+  description: "Members can see only the tickets they have purchased"
+  participant: "org.concert.network.*"
+  operation: READ
+  resource: "org.concert.network.ConcertEvent"
+  action: ALLOW
+}
